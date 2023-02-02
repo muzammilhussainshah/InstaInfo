@@ -108,7 +108,7 @@ export const InformationContainer = ({ profileFollower, profileFollowing, profil
             </View>
             <Button
                 callBack={() => { navigation.goBack() }}
-                title={`Search Next`}
+                title={`Search Another User`}
                 customStyle={styles.footerContainer}
                 titleStyle={styles.footerText}
             />
@@ -129,7 +129,7 @@ export const NoDataMessage = ({ loader, navigation }) => {
             {!loader &&
                 <Button
                     callBack={() => { navigation.goBack() }}
-                    title={`Search Next`}
+                    title={`Search Another User`}
                     customStyle={styles.footerContainer}
                     titleStyle={styles.footerText}
                 />
