@@ -24,14 +24,14 @@ export const Loader = () => {
     )
 }
 
-export const ProfileSection = ({ profileImage, profileName, profileDesc }) => {
+export const ProfileSection = ({ profileImage, profileName, profileDesc, }) => {
     return (
         <>
             <View style={styles.profileContainer}>
                 <Image
                     style={styles.profile}
                     resizeMode='contain'
-                    source={{ uri: profileImage }} />
+                    source={{ uri: profileImage ? profileImage : "https://cdn-icons-png.flaticon.com/512/1053/1053244.png" }} />
             </View>
             <View style={styles.profileBioContainer}>
                 <Text style={styles.name}>{profileName}</Text>
@@ -71,12 +71,12 @@ export const StatusSection = ({ profileFollower, profileFollowing, profilePost, 
     )
 }
 
-export const InformationContainer = ({ profileFollower, profileFollowing, profilePost, }) => {
+export const InformationContainer = ({ profileFollower, profileFollowing, profilePost, navigation }) => {
     return (
         <>
             <View>
                 <FlatList
-                    data={['Current follow details', `Lost/Gained Followers`, `Total Video Post`]}
+                    data={['Current follow details', `Lost/Gained Followers`, `Total Post`]}
                     renderItem={({ item, index }) => {
                         return (
                             <>
@@ -85,18 +85,18 @@ export const InformationContainer = ({ profileFollower, profileFollowing, profil
                                     {(index == 0 || index == 1) ?
                                         <>
                                             <View style={styles.cardContainer('48%', index, 'left')}>
-                                                <Text style={styles.titleText(25)}>{index == 0 ? profileFollower : 20}</Text>
+                                                <Text style={styles.titleText(25)}>{index == 0 ? profileFollower : Math.floor(Math.random() * 10)}</Text>
                                                 <Text style={styles.subTitleText(0, Colors.white)}>{index == 0 ? 'Followers' : index == 1 ? 'Lost' : ''}</Text>
                                             </View>
                                             <View style={styles.cardContainer('48%', index, 'right')}>
-                                                <Text style={styles.titleText(25)}>{index == 0 ? profileFollowing : 15}</Text>
+                                                <Text style={styles.titleText(25)}>{index == 0 ? profileFollowing : Math.floor(Math.random() * 100)}</Text>
                                                 <Text style={styles.subTitleText(0, Colors.white)}>{index == 0 ? 'Following' : index == 1 ? 'Gained' : ''}</Text>
                                             </View>
                                         </>
                                         :
                                         <View style={styles.cardContainer('100%', index)}>
                                             <Text style={styles.titleText(25)}>{profilePost}</Text>
-                                            <Text style={styles.subTitleText(0, Colors.white)}>{'Videos'}</Text>
+                                            <Text style={styles.subTitleText(0, Colors.white)}>{'Posts'}</Text>
                                         </View>
                                     }
                                 </View>
@@ -107,7 +107,8 @@ export const InformationContainer = ({ profileFollower, profileFollowing, profil
                 />
             </View>
             <Button
-                title={`See Top Videos`}
+                callBack={() => { navigation.goBack() }}
+                title={`Search Next`}
                 customStyle={styles.footerContainer}
                 titleStyle={styles.footerText}
             />
@@ -115,12 +116,24 @@ export const InformationContainer = ({ profileFollower, profileFollowing, profil
     )
 }
 
-export const NoDataMessage = () => {
+export const NoDataMessage = ({ loader, navigation }) => {
     return (
-        <Image
-            source={{ uri: `https://streamnow.appswamy.com/assets/img/no-data-found.png` }}
-            resizeMode='contain'
-            style={{ height: "100%", width: "100%" }}
-        />
+        <View>
+
+            <Image
+                source={{ uri: `https://streamnow.appswamy.com/assets/img/no-data-found.png` }}
+                resizeMode='contain'
+                blurRadius={loader && 5}
+                style={{ height: "100%", width: "100%", }}
+            />
+            {!loader &&
+                <Button
+                    callBack={() => { navigation.goBack() }}
+                    title={`Search Next`}
+                    customStyle={styles.footerContainer}
+                    titleStyle={styles.footerText}
+                />
+            }
+        </View>
     )
 }

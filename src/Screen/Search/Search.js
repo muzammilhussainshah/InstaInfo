@@ -15,7 +15,7 @@ import { styles } from './styles';
 
 const Search = ({ navigation }) => {
 
-  const [searchQuery, setSearchQuery] = React.useState('itz_erum');
+  const [searchQuery, setSearchQuery] = React.useState('');
 
   const onChangeSearch = query => setSearchQuery(query);
 
@@ -42,8 +42,9 @@ const Search = ({ navigation }) => {
       </View>
 
       <TouchableOpacity
+        disabled={searchQuery.length > 0 ? false : true}
         onPress={() => { navigation.navigate('Profile', { searchQuery }) }}
-        activeOpacity={0.9}
+        activeOpacity={0.7}
         style={styles.searchContainer}>
         <Text style={styles.searchText}>{`Search`}</Text>
       </TouchableOpacity>

@@ -18,7 +18,7 @@ import {
   StatusSection
 } from './Components/Component';
 
-const Profile = ({ route }) => {
+const Profile = ({ route,navigation }) => {
 
   const [profileInfo, setProfileInfo] = useState(`No Data Found`)
   const [loader, setloader] = useState(false)
@@ -43,23 +43,28 @@ const Profile = ({ route }) => {
         .then(function (response) {
           let resp = JSON.stringify(response.data);
           const $ = require('react-native-cheerio');
-          let profileImage = $('img', resp)[0].attribs.src.slice(2, $('img', resp)[0].attribs.src.length - 2)
-          let profilePost = $('span', resp)[0].children[0].data;
-          let profileFollower = $('span', resp)[1].children[0].data;
-          let profileFollowing = $('span', resp)[2].children[0].data;
-          let profileDesc = $('span', resp)[3].children[0].data;
-          let profileName = $('h1', resp)[0].children[0].data.split('(')[0];
+          let profileImage = $('img', resp)[0]?.attribs?.src?.slice(2, $('img', resp)[0]?.attribs?.src?.length - 2)
+          let profilePost = $('span', resp)[0]?.children[0]?.data;
+          let profileFollower = $('span', resp)[1]?.children[0]?.data;
+          let profileFollowing = $('span', resp)[2]?.children[0]?.data;
+          let profileDesc = $('span', resp)[3]?.children[0]?.data;
+          let profileName = $('h1', resp)[0]?.children[0]?.data.split('(')[0];
           let profileData = { profileName, profileDesc: profileDesc.replaceAll('\\n', ''), profileFollowing, profileFollower, profilePost, profileImage }
+          console.log(profileData,'profileData',profileImage,resp)
           setProfileInfo(profileData)
           setloader(false)
         })
         .catch(function (error) {
+      console.log(error,'err profileData')
+
           setProfileInfo('No Data Found')
           setloader(false)
         });
 
     }
     catch (err) {
+      console.log(err,'err profileData')
+
       setloader(false)
       setProfileInfo('No Data Found')
     }
@@ -80,11 +85,11 @@ const Profile = ({ route }) => {
             <StatusSection {...profileInfo} />
           </View>
           <View style={{ flex: 7, }}>
-            <InformationContainer  {...profileInfo} />
+            <InformationContainer  {...profileInfo} navigation={navigation} />
           </View>
         </>
         :
-        <NoDataMessage />
+        <NoDataMessage loader={loader} navigation={navigation} />
       }
     </View>
   );
