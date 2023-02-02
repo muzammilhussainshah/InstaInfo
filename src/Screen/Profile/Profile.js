@@ -43,12 +43,12 @@ const Profile = ({ route,navigation }) => {
         .then(function (response) {
           let resp = JSON.stringify(response.data);
           const $ = require('react-native-cheerio');
-          let profileImage = $('img', resp)[0]?.attribs?.src?.slice(2, $('img', resp)[0]?.attribs?.src?.length - 2)
-          let profilePost = $('span', resp)[0]?.children[0]?.data;
-          let profileFollower = $('span', resp)[1]?.children[0]?.data;
-          let profileFollowing = $('span', resp)[2]?.children[0]?.data;
-          let profileDesc = $('span', resp)[3]?.children[0]?.data;
-          let profileName = $('h1', resp)[0]?.children[0]?.data.split('(')[0];
+          let profileImage = $('img', resp)[0].attribs.src.slice(2, $('img', resp)[0].attribs.src.length - 2)
+          let profilePost = $('span', resp)[0].children[0].data;
+          let profileFollower = $('span', resp)[1].children[0].data;
+          let profileFollowing = $('span', resp)[2].children[0].data;
+          let profileDesc = $('span', resp)[3].children[0].data;
+          let profileName = $('h1', resp)[0].children[0].data.split('(')[0];
           let profileData = { profileName, profileDesc: profileDesc.replaceAll('\\n', ''), profileFollowing, profileFollower, profilePost, profileImage }
           console.log(profileData,'profileData',profileImage,resp)
           setProfileInfo(profileData)
