@@ -1,112 +1,90 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
 
-import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
 
 import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  SafeAreaProvider,
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
+} from 'react-native-safe-area-context';
+import Navigation from './src/router/Tab';
+import { PortalProvider } from '@gorhom/portal';
+// import store from './src/store';
+
+// import { Provider } from 'react-redux';
+import { LogBox, StatusBar, View } from 'react-native';
+const cheerio = require('react-native-cheerio')
+
+function App() {
+  // useEffect(async () => {
+
+  //   try {
+  //     // const option = {
+  //     //   method: 'GET',
+  //     //   url: 'https://privatephotoviewer.com/usr/muzammil_shah',
+  //     //   headers: { 
+  //     //     'Content-Type': 'application/json;charset=utf-8'
+  //     //   },
+  //     // };
+  //     // var resp = await axios(option);
+  //     // console.log(resp.data,'resprespresp') 
+
+
+
+  //     var config = {
+  //       method: 'get',
+  //       url: 'https://privatephotoviewer.com/usr/d',
+  //       headers: {
+  //         'Content-Type': 'application/json;charset=utf-8'
+  //       },
+  //     };
+
+  //     axios(config)
+  //       .then(function (response) {
+  //         let resp = JSON.stringify(response.data);
+  //         const $ = require('react-native-cheerio');
+  //         let profileImage = $('img', resp)[0].attribs.src.slice(1)
+  //         let profilePost = $('span', resp)[0].children[0].data;
+  //         let profileFollower = $('span', resp)[1].children[0].data;
+  //         let profileFollowing = $('span', resp)[2].children[0].data;
+  //         let profileDesc = $('span', resp)[3].children[0].data;
+  //         let profileName = $('h1', resp)[0].children[0].data.split('(')[0];
+  //         console.log(profileName,'testing',);
+  //         console.log(profileDesc,'profileDesc',);
+  //         console.log(profileFollowing,'profileFollowing',);
+  //         console.log(profileFollower,'profileFollower',);
+  //         console.log(profilePost,'profilePost',);
+  //         console.log(profileImage,'profileImage',);
+  //         console.log(resp,'respresprespresp');
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error);
+  //         // No data found
+  //       });
+
+  //   }
+  //   catch (err) {
+  //     console.log(err, 'errerrerrerr')
+  //         // No data found
+
+  //   }
+
+
+
+
+  //   LogBox.ignoreLogs(['Remote debugger']);
+  // }, [])
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    // <Provider store={store}>
+      // <StatusBar
+      //   hidden={true}
+      // />
+      <SafeAreaProvider>
+        <PortalProvider>
+          <Navigation />
+        </PortalProvider>
+      </SafeAreaProvider>
+    // </Provider>
   );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+}
 
 export default App;
