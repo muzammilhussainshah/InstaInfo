@@ -1,4 +1,5 @@
 // @app
+import axios from 'axios';
 import React, {
   useEffect,
   useState
@@ -18,7 +19,8 @@ import Colors from '../../styles/Colors';
 import { styles } from './styles';
 
 const Search = ({ navigation }) => {
-  const [searchQuery, setSearchQuery] = React.useState('');
+  const [searchQuery, setSearchQuery] = React.useState('itz_erum');
+  // 'ahmedshah060'
 
   const onChangeSearch = query => setSearchQuery(query);
 
@@ -31,9 +33,11 @@ const Search = ({ navigation }) => {
 
       ></Image>
 
-      <Text style={{ fontSize: 25
-        ,position:'absolute',zIndex:2,top:'10%',
-        width:"60%" , fontWeight: '600', color: Colors.white, textAlign: 'center' }}>Search Instagram Information</Text>
+      <Text style={{
+        fontSize: 25
+        , position: 'absolute', zIndex: 2, top: '10%',
+        width: "60%", fontWeight: '600', color: Colors.white, textAlign: 'center'
+      }}>Search Instagram Information</Text>
       <View style={{
         height: 50,
         backgroundColor: Colors.white,
@@ -44,13 +48,19 @@ const Search = ({ navigation }) => {
         <AntDesign name="search1" size={20} color={Colors.black} style={{ marginHorizontal: 10 }} />
         <TextInput
           style={{ flex: 1, color: Colors.black }}
-          placeholder="Eenter Uuser Name Here"
+          placeholder="Enter User Name Here"
           placeholderTextColor={Colors.black}
-        // onChangeText={onChangeText}
-        // value={text}
+          onChangeText={onChangeSearch}
+          value={searchQuery}
         />
       </View>
       <TouchableOpacity
+        onPress={() => {
+          // 'muzammmil_shah'
+          navigation.navigate('Profile', { searchQuery })
+          console.log(searchQuery, 'searchQuerysearchQuery')
+          // getInstaInfo(searchQuery)
+        }}
         activeOpacity={0.9}
         style={{
           backgroundColor: 'rgba(0,0,0,.3)',

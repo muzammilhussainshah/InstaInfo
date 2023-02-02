@@ -22,10 +22,6 @@ function RootNavigator() {
     > 
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="Profile" component={Profile} />
-
-      {/* <Stack.Screen name="VideoScreen" component={VideoScreen} />
-      <Stack.Screen name="TrendingNews" component={TrendingNews} />
-      <Stack.Screen name="MatchNews" component={MatchNews} /> */}
     </Stack.Navigator>
   );
 }
