@@ -18,7 +18,6 @@ import {
   StatusSection
 } from './Components/Component';
 
-
 const Profile = ({ route }) => {
 
   const [profileInfo, setProfileInfo] = useState(`No Data Found`)
@@ -71,7 +70,7 @@ const Profile = ({ route }) => {
 
       {loader && <Loader />}
 
-      {profileInfo == 'No Data Found' ?
+      {profileInfo !== 'No Data Found' ?
         <>
           <View style={styles.profileSection}>
             <ProfileSection   {...profileInfo} />
