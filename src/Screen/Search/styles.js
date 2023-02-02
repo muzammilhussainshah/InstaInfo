@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
         backgroundColor: Colors.tabBg,
         flex: 1,
         justifyContent: "center",
+        // paddingTop:'30%',
         alignItems: "center"
     }
 });
